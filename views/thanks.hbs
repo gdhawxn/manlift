@@ -1,0 +1,81 @@
+{{#contentFor 'pageStyles'}}
+        <link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
+     <style>
+         .card {
+  margin: 0 auto;
+  text-align: center;
+  
+  padding: 5rem 1rem;
+}
+#sunglasses {
+  width: 200px;
+  margin: auto;
+  vendor-animation-delay: 2.5s;
+  vendor-animation-duration: 1.5s;
+}
+
+.bg {
+  background: #ff0052; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #ff0052 0%, #8f4899 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ff0052), color-stop(100%,#8f4899)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #ff0052 0%,#8f4899 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg, #ff0052 0%,#8f4899 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg, #ff0052 0%,#8f4899 100%); /* IE10+ */
+background: linear-gradient(135deg, #ff0052 0%,#8f4899 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0052', endColorstr='#8f4899',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.ty {
+  font-family: 'Fira Sans', Helvetica;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 8rem;
+  font-kerning: normal;
+  line-height: 8rem;
+  vendor-animation-delay: 1.5s;
+  vendor-animation-duration: .5s;
+  text-align: center;
+}
+
+.strokelight {
+  -webkit-text-stroke: 1px #fff;
+  color: transparent;
+}
+
+.strokedark {
+  -webkit-text-stroke: 1px #2C2149;
+  color: transparent;
+}
+
+.solid {
+  color: #ffeb00;
+}
+
+.note {
+  font-family: 'Roboto', Helvetica, sans-serif;
+  font-weight: 300;
+  color: rgba(255, 255, 255, .4);
+  text-align: center;
+  color: #FFF;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  vendor-animation-delay: 1s;
+  vendor-animation-duration: .5s;
+}
+
+
+     </style>   
+{{/contentFor}}
+<div class= "card bg animated fadeIn" style="min-height : 100vh">
+    
+    <img src="/images/arunachal_logo.png" alt="" style="height : 300px ; width : 300px ; margin :0 auto" > 
+    <p class= "note animated fadeIn">Thank You for your valuable feedback</p><br/></br>
+    {{!-- <span class="ty strokelight animated zoomIn">thank you</span></br> --}}
+    <br/>
+  
+{{#contentFor "pageScripts"}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+{{!-- <script src="//cdn.jsdelivr.net/emojione/1.5.0/lib/js/emojione.min.js"></script> --}}
+
+{{/contentFor}}

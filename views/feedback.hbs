@@ -1,0 +1,59 @@
+{{#contentFor 'pageStyles'}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/feedback.css">
+{{/contentFor}}
+
+<div class='fb-form'>
+  <form method="POST" action='/feedback/{{sms.token}}' class='form-group' id="fdForm">
+    <img src="/images/arunachal_logo.png" alt="" style="height : 300px ; width : 300px ; margin :0 auto" >     
+    <h2>Tell us what you think</h2>
+    <div id='errormsg' class="alert alert-warning" style="display:none"></div>
+    <input class='form-control' placeholder='Name' type='text' name='name' value="{{sms.name}}" disabled>
+    <input class='form-control' placeholder='Mobno' type='text' name="mobno" value="{{sms.mobno}}" disabled>
+    <input class='form-control' placeholder='Station' type='text' name="" value="{{sms.station}}" disabled>
+    <textarea class='form-control' id='fb-comment' name='comment' placeholder='Tell us what you think'></textarea>
+    <input type="hidden" name="rating" id="rating_hidden">
+    <div class='rating'>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+      <i class='fa fa-star'></i>
+    </div>
+    <input class='form-control btn btn-primary' type='submit' required>
+  </form>
+</div>
+
+
+{{#contentFor "pageScripts"}}
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+    $('.rating .fa-star').click(function() {
+        $('.rating .active-rating').removeClass('active-rating');
+        $(this).toggleClass('active-rating');
+        var index = $(this).index();
+        // console.log("Index" , index);
+        var index1 = 5-index;
+        console.log("Index" , index1);
+        $('#rating_hidden').val(index1)
+
+    });
+    
+    $('#fdForm').submit(function() {
+       
+        var l =$('.rating .active-rating') ;
+        console.log(l.length);  
+        if(l.length) 
+            return true ;
+        else {
+            $("#errormsg").text("Please Select Some Rating to Proceed")
+            $("#errormsg").show()           
+            return false
+        } 
+
+    });
+
+</script>
+
+{{/contentFor}}

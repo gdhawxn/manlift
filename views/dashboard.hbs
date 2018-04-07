@@ -1,0 +1,60 @@
+<div class="animated fadeIn">
+
+
+    <div class="row">
+            
+            {{#if success }}
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                  <span class="badge badge-pill badge-success">Success</span> SMS successfully sent to user
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
+            {{/if}}
+
+        <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto"> 
+        
+        <div class="card">
+            <div class="card-header">
+            <strong>Add</strong> User
+            </div>
+            <div class="card-body card-block">
+            <form action="/newsms" method="post" class="">
+                <div class="form-group">
+                    <label for="name" class=" form-control-label">Name</label>
+                    <input type="text" id="" name="name" placeholder="Enter Name.." class="form-control" required>
+                    <span class="help-block">Please enter name</span>
+                </div>
+                <div class="form-group">
+                    <label for="nf-password" class=" form-control-label">Mobile</label>
+                    <input type="number" max="9999999999" id="mobno" name="mobno" placeholder="Enter Mobile" class="form-control" required>
+                    <span class="help-block">Please enter mobile number</span>
+                </div>
+                <div class="form-group">
+                    <label for="nf-password" class=" form-control-label">Police Station</label>
+                    <select id="station" name="station" class="form-control" required>
+                        <option disabled selected>Select One</option>
+                        <option value="Pasighat">Pasighat</option>
+                        <option value="Sille Oyan">Sille Oyan</option>
+                        <option value="Ruksin">Ruksin</option>
+                    </select>
+                    <span class="help-block">Please select the police station</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+                </button>
+        
+            </form>
+            </div>
+            
+        </div>
+
+        </div>
+
+
+    </div>
+
+
+</div><!-- .animated -->

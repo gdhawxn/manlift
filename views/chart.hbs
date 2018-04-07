@@ -1,0 +1,192 @@
+{{#contentFor 'pageStyles'}}
+    
+{{/contentFor}}
+
+<div class="row">
+    <div class="col-lg-8 col-md-10" style="margin:auto">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mb-3">Select a Police Stations to view the responses</h4>
+                <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select class="form-control" id="sel1">
+                        <option value="" disabled selected>Select Options</option>
+                        <option value="all">All</option>
+                        {{#each records}}
+                            <option value="{{@key}}">{{@key}}</option>
+                        {{/each}}
+                    </select>
+                </div>          
+            </div>
+        </div>
+    </div><!-- /# column -->
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10" style="margin:auto">
+        <div class="card">
+            <div class="card-body" style="min-height : 300px">
+                <h4 class="mb-3">Chart</h4>
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </div><!-- /# column -->
+</div>
+
+
+
+
+{{#contentFor 'pageScripts'}}
+
+<script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+
+<script>
+    function remove(array, element) {
+        return array.filter(e => e !== element);
+    }
+
+    var ratings = JSON.parse('{{{recordsstring}}}');
+    var itemsSelected = [];
+    var all = false ;
+    var chart ;
+    console.log(ratings)
+    
+    jQuery('#sel1').selectize({
+        maxItems:1000 ,
+        onItemAdd : function(value) {
+            
+            
+            itemsSelected.push(value) ;
+            console.log(value);
+            console.log("Showing");
+            
+
+            if(all) {
+                return
+            }
+
+            var array = [0,0,0,0,0] ;
+            if(value == 'all'){
+
+                for(key in ratings) {
+                   var t = ratings[key] ;
+                    array[0] += t[0] ;
+                    array[1] += t[1] ;
+                    array[2] += t[2] ;
+                    array[3] += t[3] ;
+                    array[4] += t[4] ; 
+                    
+                }
+
+                all = true
+            } else {
+                
+                itemsSelected.forEach( (item) => {
+                    var t = ratings[item] ;
+                    array[0] += t[0] ;
+                    array[1] += t[1] ;
+                    array[2] += t[2] ;
+                    array[3] += t[3] ;
+                    array[4] += t[4] ;
+                });
+
+            }
+          
+            if(chart)
+                chart.destroy();
+
+            chart = renderChart(array);
+
+        } ,
+        onItemRemove : function(value) {
+            
+            
+            itemsSelected = remove(itemsSelected , value)
+
+            var array = [0,0,0,0,0] ;
+            
+            if(value == 'all'){
+                all = false;
+            }
+
+            if(all) {
+                return
+            }
+            var array = [0,0,0,0,0] ;
+            if(all){
+
+                for(key in ratings) {
+                   var t = ratings[key] ;
+                    array[0] += t[0] ;
+                    array[1] += t[1] ;
+                    array[2] += t[2] ;
+                    array[3] += t[3] ;
+                    array[4] += t[4] ; 
+                }
+            } else {
+                itemsSelected.forEach( (item) => {
+                    var t = ratings[item] ;
+                    array[0] += t[0] ;
+                    array[1] += t[1] ;
+                    array[2] += t[2] ;
+                    array[3] += t[3] ;
+                    array[4] += t[4] ;
+                });
+
+            }
+
+
+            if(chart)
+                chart.destroy();
+
+            chart = renderChart(array);
+
+        }
+    });
+
+    var renderChart = function (dataset) {
+
+        console.log("Fuction")
+        //dataset = array
+        var ctx = document.getElementById( "chart" );
+        ctx.height = 150;
+        var myChart = new Chart( ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [ {
+                    data: dataset,
+                    backgroundColor: [
+                                        "red",
+                                        "pink",
+                                        "blue",
+                                        "yellow",
+                                        "green",  
+                                    ],
+                    hoverBackgroundColor: [
+                                        "red",
+                                        "pink",
+                                        "blue",
+                                        "yellow",
+                                        "green",  
+                                    ],
+
+                                } ],
+                labels: [
+                                "1 Star",
+                                "2 Star",
+                                "3 Star",
+                                "4 Star",
+                                "5 Star"
+                            ]
+            },
+            options: {
+                responsive: true
+            }
+        } );
+
+        return myChart;
+    }
+    
+</script>
+{{/contentFor}}
+

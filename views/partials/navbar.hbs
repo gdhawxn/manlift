@@ -1,0 +1,80 @@
+    <!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="./"><img src="images/1.png" alt="Logo" style="max-width: 200px"></a>
+            <a class="navbar-brand hidden" href="./"><img src="images/2.png" alt="Logo" style="max-width: 20px"></a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                
+                <h3 class="menu-title">Send SMS</h3><!-- /.menu-title -->
+                <li>
+                    <a href="/"> <i class="menu-icon ti-email"></i>Send SMS </a>
+                </li>
+                
+                <h3 class="menu-title">View Responses</h3><!-- /.menu-title -->
+                <li>
+                    <a href="/chart"> <i class="menu-icon ti-email"></i>Overview </a>
+                </li>
+                <li>
+                    <a href="/details"> <i class="menu-icon ti-email"></i>Details </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                
+            </div>
+
+            <div class="col-sm-5">
+                <div class="user-area dropdown float-right">
+                    <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
+                </div>
+
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+        {{{body}}}
+    </div>
+</div>

@@ -1,0 +1,71 @@
+{{#contentFor 'pageStyles'}}
+    
+{{/contentFor}}
+
+
+<div class="animated fadeIn">
+                <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Records</strong>
+                        </div>
+                        <div class="card-body">
+                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>MobNo</th>
+                        <th>Police Station</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {{#each records}}
+                        <tr>
+                            <td>{{this.name}}</td>
+                            <td>{{this.mobno}}</td>
+                            <td>{{this.station}}</td>
+                            <td>{{this.response.rating}}</td>
+                            <td>{{this.response.comment}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                  </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+            </div><!-- .animated -->
+
+
+
+
+{{#contentFor 'pageScripts'}}
+
+
+    <script src="/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/assets/js/lib/data-table/datatables-init.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('#bootstrap-data-table-export').DataTable();
+        } );
+    </script>
+
+{{/contentFor}}
+
