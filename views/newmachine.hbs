@@ -1,0 +1,68 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
+            <div class="w3-card">
+                <div class="card-header">
+                    <strong>Add</strong> Machine
+                </div>
+                <div class="card-body card-block">
+                    <div class="animated fadeIn">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
+                                <div class="card-body card-block">
+                                    <form action="/index" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Serial Number" name="sno">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Make" name="make" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Model" name="model" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Year" name="year">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Rival" name="rival">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="deponame">Depo-Name</label>
+                                            <select name="deponame">
+                                                <option value="NODIA"> NODIA</option>
+                                                <option value="AHD"> AHD</option>
+                                                <option value="BIR"> BIR</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="catagory">Catagory</label>
+                                            <select name="fuel">
+                                                <option value="Bomb-Lift"> Bomb-Lift</option>
+                                                <option value="Caesar-Lift"> Caesar-Lift</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fuel">Fuel-Type</label>
+                                            <select name="fuel">
+                                                <option value="Diesel"> Diesel</option>
+                                                <option value="Battery"> Battery-Operated</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Hour Meter" name="hmeter">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn w3-round btn-lg btn-default btn-block btn-success">Submit</button>
+                                        </div>
+                                        <a class="btn btn-primary w3-round" href="/">BACK</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .animated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .animated -->

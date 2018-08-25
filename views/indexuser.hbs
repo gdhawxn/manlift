@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="container">
+    <div class="container">
+        <h1><i>User Index</i></h1>
+    </div>
+    <style>
+        .tile {
+            margin: 20px;
+        }
+
+        .tex {
+            color: black;
+        }
+
+        .pic {
+            padding: 20px;
+        }
+
+        .link:hover .tt {
+            display: block;
+        }
+    </style>
+    {{#each mcs}}
+    <div class="tile col-md-3 col-sm-6 w3-card">
+        <img src="images/user.png" class="pic" style="width:100%">
+        <div class="thumbnail">
+            <div class="caption">
+                <p><b class="tex">{{this.name}}</b></p>
+                <p><span class="w3-tooltip"><a> Email </a> <span style="position:absolute;left:0;bottom:18px" class="w3-text w3-tag w3-blue">{{this.email}}</span></span>
+                    <p><span class="w3-tooltip"><a> Username </a> <span style="position:absolute;left:0;bottom:18px" class="w3-text w3-tag w3-blue">{{this.username}}</span></span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

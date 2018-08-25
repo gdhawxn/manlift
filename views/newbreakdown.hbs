@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
+            <div class="w3-card">
+                <div class="card-header">
+                    <strong>Breakdown</strong> Report
+                </div>
+                <div class="card-body card-block">
+                    <div class="animated fadeIn">
+                        <div class="row">
+                            {{#if success }}
+                            <div class="col-sm-12">
+                                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                                    <span class="badge badge-pill badge-success">Success</span> SMS successfully sent to user
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            <style>
+                                textarea{
+                resize:none;
+                width:100%;
+                border-radius:5%;
+                padding:10px;
+                border:1px solid #CED4D9;
+            }
+        </style>
+                            <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
+                                <div class="card-body card-block">
+                                    <form action="/index/breakdowns" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Serial Number" name="sno" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Site Name" name="breakdown[site_name]" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Site Address" name="breakdown[site_address]" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Contact Number" name="breakdown[phone_number]" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="breakdown[fault]">Fault</label>
+                                            <select name="breakdown[fault]">
+                                                <option value="ESF"> ESF</option>
+                                                <option value="HSL"> HSL</option>
+                                                <option value="CFC"> CFC</option>
+                                                <option value="MSF"> MSF</option>
+                                                <option value="LBV"> LBV</option>
+                                                <option value="FSl"> FSL</option>
+                                                <option value="LFL"> LFL</option>
+                                                <option value="PFQ"> PFQ</option>
+                                                <option value="LOL"> LOL</option>
+                                                <option value="LCL"> LCL</option>
+                                                <option value="WSL"> WSL</option>
+                                                <option value="EOL"> EOL</option>
+                                                <option value="CSF"> CSF</option>
+                                                <option value="SRF"> SRF</option>
+                                                <option value="HCF"> HCF</option>
+                                                <option value="LSS"> LSS</option>
+                                                <option value="UEF"> UEF</option>
+                                                <option value="HTS"> HTS</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="breakdown[parts]" placeholder="Parts go here..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" value="solved" name="breakdown[solved]"> Solved
+                                        </div>
+                                        <div class="form-group">
+                                            <hr>
+                                            <button class="btn btn-lg w3-round btn-default btn-block btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                    <a class="btn btn-primary w3-round" href="/">BACK</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .animated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .animated -->

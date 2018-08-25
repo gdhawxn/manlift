@@ -7,15 +7,17 @@ import hbs from 'express-hbs';
 
 import passport from 'passport';
 import session from 'express-session';
-import connectMongo from 'connect-mongodb-session' ;
-import config from './config/config' ;
-import flash from 'connect-flash' ;
+import connectMongo from 'connect-mongodb-session';
+import config from './config/config';
+import flash from 'connect-flash';
 let MongoDBStore = connectMongo(session);
 
 const port = process.env.PORT || 8888;
 
 let app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
@@ -39,7 +41,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-import passport_config from './middlewares/passport' ;
+import passport_config from './middlewares/passport';
 passport_config(passport);
 
 app.use(passport.initialize());
@@ -47,8 +49,8 @@ app.use(passport.session());
 app.use(flash());
 
 app.engine('hbs', hbs.express4({
-    partialsDir: __dirname + '/views/partials' ,
-    layoutsDir: __dirname + '/views/layouts' ,
+    partialsDir: __dirname + '/views/partials',
+    layoutsDir: __dirname + '/views/layouts',
     defaultLayout: __dirname + '/views/layouts/' + 'default',
 }));
 app.set('view engine', 'hbs');
@@ -62,19 +64,19 @@ app.use(express.static('media'));
 
 hbs.registerHelper('replacespace', function(text, options) {
 
-    return text.replace(" " , "")
-  });
-  
+    return text.replace(" ", "")
+});
+
 
 
 mongodb.getConnection()
-  .then((msg) => {
-    console.log(msg);
-    app.listen(port, () => {
-      console.log(`Server running and listening in http://localhost:${port}`);
+    .then((msg) => {
+        console.log(msg);
+        app.listen(port, () => {
+            console.log(`Server running and listening in http://localhost:${port}`);
+        });
+        // require('./scripts/gen.js');
+    })
+    .catch((err) => {
+        console.log(err);
     });
-    // require('./scripts/gen.js');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
