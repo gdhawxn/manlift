@@ -1,13 +1,13 @@
 import express from 'express';
 import passport from 'passport';
 import crypto from 'crypto';
-import SMS from '../models/sms';
 import request from 'request';
 import config from '../config/config';
 var machine = require('../models/machines');
 var breakdown = require('../models/breakdowns');
 var users = require('../models/user');
 let router = express.Router();
+var employees = require('../models/employee');
 
 router.get('/login', (req, res) => {
     res.render('login');
@@ -36,13 +36,13 @@ router.get('/logout', function(req, res) {
 });
 
 
-router.get("/register", isLoggedIn, function(req, res) {
+router.get("/user/new", isLoggedIn, function(req, res) {
     res.render("newuser", {
         user: req.user
     });
 });
 
-router.post("/register", isLoggedIn, function(req, res) {
+router.post("/user/new", isLoggedIn, function(req, res) {
     users.create({
         name: req.body.name,
         username: req.body.username,
@@ -58,12 +58,45 @@ router.post("/register", isLoggedIn, function(req, res) {
     res.redirect("/");
 });
 
-router.get('/index/new', isLoggedIn, function(req, res) {
+router.get("/employee/new", isLoggedIn, function(req, res) {
+    res.render("newemployee", {
+        user: req.user
+    });
+});
+
+router.get("/employees/get",function(req,res){
+   employees.find({}).then(data => {
+        if (data) {
+            res.render('indexemployee', {
+                mcs: data,
+                user: req.user
+            })
+        }
+    });
+});
+
+router.post("/employee/new", isLoggedIn, function(req, res) {
+    employees.create({
+        name: req.body.name,
+        phone_number: req.body.phone_number,
+        password: req.body.password,
+        email: req.body.email
+    }, function(err, employee) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(employee);
+        }
+    })
+    res.redirect("/");
+});
+
+router.get('/machine/new', isLoggedIn, function(req, res) {
     res.render('newmachine.hbs', {
         user: req.user
     });
 });
-router.post('/index', function(req, res) {
+router.post('/machine', function(req, res) {
     var sno = req.body.sno;
     var make = req.body.make;
     var model = req.body.model;
@@ -94,30 +127,22 @@ router.post('/index', function(req, res) {
 });
 
 
-router.post("/index/breakdowns", function(req, res) {
-    var c = req.body.breakdown;
-    var p = [];
-    p = c.parts.split(",");
-    machine.find({
+router.post("/machine/breakdown", function(req, res) {
+    machine.findOne({
         sno: req.body.sno
     }, function(err, m) {
         if (!err) {
+            console.log(m);
+            console.log(req.body)
             breakdown.create({
-                machine: m._id,
-                site_name: c.site_name,
-                site_address: c.site_address,
-                phone_number: c.phone_number,
-                fault: c.fault,
-                parts: p,
-                solved: c.solved
-            }, function(err, breakdown) {
-                if (!err) {
-                    //                  machine.breakdowns.push(breakdown);
-                    //                  machine.save();
-                    console.log(breakdown);
+                ...req.body ,
+                machine:m._id
+            }).then( breakdown => {
+                console.log(breakdown);
                     res.redirect("/");
-                }
-            });
+                }).catch(err => {
+                console.error(err)
+            })
         } else {
             res.redirect("/");
         }
@@ -125,22 +150,129 @@ router.post("/index/breakdowns", function(req, res) {
 });
 
 
-router.get("/index/breakdowns/new", isLoggedIn, function(req, res) {
-    machine.findById(req.params.id, function(err, machine) {
-        if (!err) {
-            res.render("newbreakdown", {
-                c: machine,
+router.get("/machine/breakdown/new", isLoggedIn, function(req, res) {
+    machine.find({}).then(data => {
+        if (data) {
+            res.render('newbreakdown', {
+                mcs: data,
                 user: req.user
-            });
+            })
         }
-    });
+    })
 });
 
-router.get("/index/:id", function(req, res) {
+router.post("/machine/breakdown/complete",function(req,res){
+    const {parts, solved , signature , job , id } = req.body ;
+    let input = {
+        parts ,
+        solved ,
+        signature ,
+        job ,
+        completed : true
+    } 
+    let query = {
+        _id  : id
+    }
+    
+    if(!query._id){
+        res.json({
+            success : false ,
+            message : "ID Field is Required"
+        })
+    }
+    
+    
+    
+    breakdown.findOneAndUpdate(query , input , {new : true}).then(data => {
+        console.log(data);
+        res.json({
+            success : true ,
+            data : data
+        });
+    }).catch(err => {
+        console.error(err);
+    }) 
+});
+
+
+router.get('/machine/get' , (req , res) => {
+    let query = {};
+    const {id , sno } = req.query;
+    if(id){
+        query._id = id ;
+    } else if(sno){
+        query.sno = sno ;
+    } else {
+        res.json({
+            success : false ,
+            message : "ID or SNO is Reqd"
+        })
+    }
+    machine.findOne(query).then(data => {
+        if(data){
+            res.json({
+                success : true ,
+                data 
+            })    
+        } else {
+            res.json({
+                success : false ,
+                message : "Machine Not Found" 
+            })
+        }
+        
+    }).catch(err => {
+        console.error(err);
+        res.json({
+            success : false ,
+            message : "Some Error Occured"
+        })
+    })
+    
+})
+
+router.get('/machine/breakdowns/get' , (req , res) => {
+    let query = {};
+    const {id} = req.query;
+    if(id){
+        query.machine = id ;
+    } else {
+        res.json({
+            success : false ,
+            message : "ID is Reqd"
+        })
+    }
+    breakdown.find(query).then(data => {
+        if(data){
+            res.json({
+                success : true ,
+                data 
+            })    
+        } else {
+            res.json({
+                success : false ,
+                message : "No Breakdown For Machine" 
+            })
+        }
+        
+    }).catch(err => {
+        console.error(err);
+        res.json({
+            success : false ,
+            message : "Some Error Occured"
+        })
+    })
+    
+})
+
+
+
+router.get("/machine/:id", function(req, res) {
     machine.findById(req.params.id, function(err, machine) {
         res.render('show', {
             user: req.user,
-            c: machine
+            c: machine,
+            link:"/machine/"+req.params.id
         });
     })
 });
@@ -160,42 +292,8 @@ router.get('/', isLoggedIn, (req, res) => {
 
 });
 
-router.post('/smsprovider/callback', (req, res) => {
-    console.log(req.body);
-    let number = req.body.number;
-    let message = req.body.message;
-    let keyword = req.body.keyword;
 
-    SMS.find({
-        mobno: number,
-        completed: false
-    }).then((data) => {
-        console.log(data);
-
-        if (Array.isArray(data)) {
-            data = data.pop();
-        }
-
-        console.log(data);
-        console.log(data.save);
-
-        data.response.rating = parseInt(message);
-        data.completed = true;
-
-        data.save().then((result) => {
-            console.log(result)
-            res.send('ok');
-        });
-    }, (err) => {
-        console.log(err);
-        res.code(500).send();
-    });
-
-
-});
-
-
-router.get("/index/:id/delete", function(req, res) {
+router.get("/machine/:id/delete", function(req, res) {
     var id = req.params.id;
     console.log(id);
     machine.findByIdAndRemove(id, function(err, machine) {
@@ -223,6 +321,6 @@ router.get("/users", function(req, res) {
             })
         }
     })
-})
+});
 
 export default router;

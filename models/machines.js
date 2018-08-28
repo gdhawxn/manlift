@@ -13,7 +13,8 @@ var mSchema = new mongoose.Schema({
     breakdowns:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"breakdowns"
-        }]
+        }],
+    
 });
 
 module.exports = mongoose.model("machines",mSchema);

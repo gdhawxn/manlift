@@ -31,22 +31,33 @@
         </style>
                             <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
                                 <div class="card-body card-block">
-                                    <form action="/index/breakdowns" method="POST">
+                                    <form action="/machine/breakdown" method="POST">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Serial Number" name="sno" />
+                                            <label for="sno">Serial Number</label>
+                                            <select class="custom-select form-control" name="sno">
+                                                {{#each mcs}}
+                                                <option value="{{this.sno}}">{{this.sno}} ({{this.model}})</option>
+                                                {{/each}}
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Site Name" name="breakdown[site_name]" />
+                                            <input type="text" class="form-control" placeholder="Site Name" name="site[name]" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Site Address" name="breakdown[site_address]" />
+                                            <input type="text" class="form-control" placeholder="Site Address" name="site[address]" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Contact Number" name="breakdown[phone_number]" />
+                                            <input type="text" class="form-control" placeholder="Contact Name" name="contact[name]" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Contact Number" name="contact[phone_number]" />
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Fault Description" name="fault[description]" ></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="breakdown[fault]">Fault</label>
-                                            <select name="breakdown[fault]">
+                                            <select class="form-control custom-select" name="fault[category]">
                                                 <option value="ESF"> ESF</option>
                                                 <option value="HSL"> HSL</option>
                                                 <option value="CFC"> CFC</option>
@@ -66,12 +77,6 @@
                                                 <option value="UEF"> UEF</option>
                                                 <option value="HTS"> HTS</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea name="breakdown[parts]" placeholder="Parts go here..."></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="checkbox" value="solved" name="breakdown[solved]"> Solved
                                         </div>
                                         <div class="form-group">
                                             <hr>

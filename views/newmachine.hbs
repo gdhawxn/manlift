@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-10 col-sm-12" style="margin:auto">
                                 <div class="card-body card-block">
-                                    <form action="/index" method="POST">
+                                    <form action="/machine" method="POST">
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="Serial Number" name="sno">
                                         </div>
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="deponame">Depo-Name</label>
-                                            <select name="deponame">
+                                            <select name="deponame" class="form-control custom-select">
                                                 <option value="NODIA"> NODIA</option>
                                                 <option value="AHD"> AHD</option>
                                                 <option value="BIR"> BIR</option>
@@ -37,14 +37,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="catagory">Catagory</label>
-                                            <select name="fuel">
+                                            <select name="catagory" class="form-control custom-select">
                                                 <option value="Bomb-Lift"> Bomb-Lift</option>
                                                 <option value="Caesar-Lift"> Caesar-Lift</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="fuel">Fuel-Type</label>
-                                            <select name="fuel">
+                                            <select name="fuel" class="form-control custom-select">
                                                 <option value="Diesel"> Diesel</option>
                                                 <option value="Battery"> Battery-Operated</option>
                                             </select>

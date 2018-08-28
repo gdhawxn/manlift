@@ -7,7 +7,16 @@
             margin: 20px;
             background-color: white;
         }
+        .qr{
+            float:  right;
+            position:relative;
+            top:-300px;
+            right:50px;
+            height:300px;
+            width:300px;
+        }
     </style>
+    <script type="application/javascript"></script>
     <div class="container w3-card-4 tile">
         <h1><span class="w3-tag w3-yellow">{{c.model}}</span></h1>
         <h3>{{c.make}}</h3>
@@ -18,16 +27,8 @@
         <p><b>Catagory :</b>{{c.catagory}}</p>
         <p><b>Fuel : </b>{{c.fuel}}</p>
         <p><b>Hour Meter : </b>{{c.hmeter}}</p>
-        <a class="w3-tooltip btn w3-round btn-danger del" href="/index/{{c._id}}/delete">Delete</a>
-
-        {{#each c.breakdowns}}
-        <p><b>Site-Name : </b>{{this.site_name}}</p>
-        <p><b>Site-Address : </b>{{this.site_address}}</p>
-        <p><b>Contact : </b>{{this.phone_number}}</p>
-        <p><b>Fault : </b>{{this.fault}}</p>
-        <p><b>Parts : </b>{{this.parts}}</p>
-        <p><b>Status : </b>{{this.solved}}</p>
-        {{/each}}
+        <a class="w3-tooltip btn w3-round btn-danger del" href="/machine/{{c._id}}/delete">Delete</a>
+        <img class="qr" src="http://qreateandtrack.com/files/2009/12/coupon.png">
         <hr>
         <a class="btn w3-round btn-primary" href="/">BACK</a>
     </div>
